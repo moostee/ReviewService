@@ -12,9 +12,11 @@ namespace ReviewsService_Core.Data
         {
             _context = context;
             _factory = factory;
-        }     
+        }
 
-        
+        private ClientRepository _clients;
+        public ClientRepository Clients { get { if (_clients == null) { _clients = new ClientRepository(_context); } return _clients; } }
+
 
     }
 }

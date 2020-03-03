@@ -2,7 +2,6 @@
 {
     public interface IDataModule
     {
-
-
+        ClientRepository Clients { get; }
     }
 }

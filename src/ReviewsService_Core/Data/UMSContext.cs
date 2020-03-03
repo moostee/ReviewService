@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ReviewsService_Core.Domain.Entity;
 
 namespace ReviewsService_Core.Data
 {
@@ -16,6 +17,8 @@ namespace ReviewsService_Core.Data
         {
 
         }
+
+        public DbSet<Client> Clients { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
