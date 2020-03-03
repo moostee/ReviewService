@@ -46,7 +46,7 @@ namespace ReviewsService_Service.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Error(ex);
+                Log.Error(ex);
                 return BadRequest(Utilities.CatchException(response));
             }
         }
@@ -75,6 +75,7 @@ namespace ReviewsService_Service.Controllers
             }
             catch (Exception ex)
             {
+                Log.Error(ex);
                 return BadRequest(Utilities.CatchException(response));
             }
         }
@@ -96,7 +97,7 @@ namespace ReviewsService_Service.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Error(ex);
+                Log.Error(ex);
                 return BadRequest(Utilities.CatchException(response));
             }
         }
@@ -117,9 +118,39 @@ namespace ReviewsService_Service.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Error(ex);
+                Log.Error(ex);
                 return BadRequest(Utilities.CatchException(response));
             }
         }
+
+        [Route("Update")]
+        [HttpPost]
+        public IActionResult Update(int id, ClientForm form)
+        {
+            var response = Utilities.InitializeResponse();
+            try
+            {
+                //form.Id = id;
+                var model = Logic.Clients.Create(form);
+                if (id != model.Id)
+                    return BadRequest(Utilities.UnsuccessfulResponse(response, "Route Parameter does not match model ID"));
+                var found = Logic.Clients.Get(id);
+                if (found == null)
+                    return NotFound(Utilities.UnsuccessfulResponse(response, "Client does not exist"));
+                var check = Logic.Clients.UpdateExists(model);
+                if (check)
+                    return BadRequest(Utilities.UnsuccessfulResponse(response, "Client already exists"));
+                var dto = Logic.Clients.Update(found, model,
+                    "Name");
+                response.Data = dto;
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return BadRequest(Utilities.CatchException(response));
+            }
+        }
+
     }
 }
