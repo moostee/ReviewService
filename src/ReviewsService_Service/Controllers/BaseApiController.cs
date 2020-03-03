@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ReviewsService_Core.Common;
 
-namespace Ceti.Admin.Controllers
+namespace ReviewsService_Service.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -2,7 +2,7 @@
 {
     public interface ILogicModule
     {
-
+        ClientLogic Clients { get; }
 
     }
 }
