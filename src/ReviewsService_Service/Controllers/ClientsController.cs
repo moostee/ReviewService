@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ReviewsService_Core.Common;
 using ReviewsService_Core.Domain.Form;
+using ReviewsService_Core.Domain.Model;
 using ReviewsService_Core.Domain.Model.Helper;
 using ReviewsService_Core.Logic;
+using ReviewsService_Core.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +51,34 @@ namespace ReviewsService_Service.Controllers
             }
         }
 
-       
+        [Route("Search")]
+        [HttpGet]
+        public IActionResult Get(string sort = "Name", string name = "", long page = 1, long pageSize = 10, string fields = "", int draw = 1)
+        {
+            var response = Utilities.InitializeResponse();
+            try
+            {
+                var items = Logic.Clients.SearchView(name, page, pageSize, sort);
+                if (page > items.TotalPages) page = items.TotalPages;
+                var jo = new JObjectHelper();
+                jo.Add("name", name);
+
+                jo.Add("fields", fields);
+                jo.Add("sort", sort);
+                var linkBuilder = new PageLinkBuilder(jo, page, pageSize, items.TotalItems, draw);
+                AddHeader("X-Pagination", linkBuilder.PaginationHeader);
+                var dto = new List<ClientModel>();
+                if (items.TotalItems <= 0) return Ok(dto);
+                var dtos = items.Items.ShapeList(fields);
+                response.Data = dtos;
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(Utilities.CatchException(response));
+            }
+        }
+
     }
 
 

@@ -54,11 +54,11 @@ namespace ReviewsService_Service
                 });
 
             services.AddHttpContextAccessor();
-            services.AddDbContext<UMSContext>(options =>
+            services.AddDbContext<ReviewContext>(options =>
                     options.UseSqlServer(connectionString));
 
             AutoMapperConfig.RegisterMappings();
-            UMSPoco.Setup(connectionString);
+            ReviewPoco.Setup(connectionString);
 
             services.AddTransient<IFactoryModule, FactoryModule>();
             services.AddTransient<ILogicModule, LogicModule>();
