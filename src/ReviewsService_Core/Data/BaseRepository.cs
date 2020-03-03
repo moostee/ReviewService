@@ -16,8 +16,8 @@ namespace ReviewsService_Core.Data
        where TEntity : BaseEntity<TKey>
        where TModel : BaseModel<TKey>
     {
-        public UMSContext _context;
-        public BaseRepository(UMSContext context)
+        public ReviewContext _context;
+        public BaseRepository(ReviewContext context)
         {
             _context = context;
         }
@@ -289,7 +289,7 @@ namespace ReviewsService_Core.Data
         {
             get
             {
-                return UMSPoco.DbFactory.GetDatabase();
+                return ReviewPoco.DbFactory.GetDatabase();
             }
         }
 

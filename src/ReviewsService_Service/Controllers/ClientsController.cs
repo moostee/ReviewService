@@ -79,6 +79,29 @@ namespace ReviewsService_Service.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Detail")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var response = Utilities.InitializeResponse();
+            try
+            {
+                var item = await Logic.Clients.GetModel(id);
+                if (item == null)
+                {
+                    return NotFound(Utilities.UnsuccessfulResponse(response, "Client does not exist"));
+                }
+                response.Data = item;
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                //Log.Error(ex);
+                return BadRequest(Utilities.CatchException(response));
+            }
+        }
+
+
     }
 
 

@@ -13,7 +13,7 @@ namespace ReviewsService_Core.Data
         /// 
         /// </summary>
         /// <param name="context"></param>
-        public ClientRepository(UMSContext context) : base(context)
+        public ClientRepository(ReviewContext context) : base(context)
         {
         }
         /// <summary>
