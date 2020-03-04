@@ -8,5 +8,6 @@ namespace ReviewsService_Core.Domain
     public interface IFactoryModule
     {
         ClientFactory Clients { get; }
+        AppFactory Apps { get; }
     }
 }

@@ -19,5 +19,8 @@ namespace ReviewsService_Core.Logic
 
         public ClientLogic Clients { get { if (_client == null) { _client = new ClientLogic(_data, _factory); } return _client; } }
 
+        private AppLogic _app;
+        public AppLogic AppLogic { get { if (_app == null) { _app = new AppLogic(_data, _factory); } return _app; } }
+
     }
 }

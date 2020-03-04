@@ -4,5 +4,6 @@
     {
         ClientLogic Clients { get; }
 
+        AppLogic AppLogic { get; }
     }
 }

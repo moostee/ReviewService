@@ -20,6 +20,8 @@ namespace ReviewsService_Core.Data
 
         public DbSet<Client> Clients { get; set; }
 
+        public DbSet<App> Apps { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (_options == null)

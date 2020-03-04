@@ -6,5 +6,9 @@ namespace ReviewsService_Core.Domain
     {
         private ClientFactory _client;
         public ClientFactory Clients { get { if (_client == null) { _client = new ClientFactory(); } return _client; } }
+
+        private AppFactory _app;
+        public AppFactory Apps { get { if (_app == null) { _app = new AppFactory(); } return _app; } }
+
     }
 }

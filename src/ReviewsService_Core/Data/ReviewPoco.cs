@@ -44,6 +44,20 @@ namespace ReviewsService_Core.Data
                     x.Column(y => y.UpdatedAtText).Ignore();
                 });
 
+            For<App>()
+                .PrimaryKey(x => x.Id)
+                .TableName("Apps");
+
+            For<AppModel>()
+                .PrimaryKey(x => x.Id)
+                .TableName("appmodel")
+                .Columns(x =>
+                {
+                    x.Column(y => y.RecordStatusText).Ignore();
+                    x.Column(y => y.CreatedAtText).Ignore();
+                    x.Column(y => y.UpdatedAtText).Ignore();
+                });
+
         }
     }
 }

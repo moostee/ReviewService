@@ -19,10 +19,10 @@ namespace ReviewsService_Core.Domain.Model.Helper
             return response;
         }
 
-        public static ResponseModel CatchException(ResponseModel response)
+        public static ResponseModel CatchException(ResponseModel response,string errorMessage = null)
         {
             response.ResponseCode = "99";
-            response.ResponseMessage = "Error occurred while processing your request";
+            response.ResponseMessage = string.IsNullOrWhiteSpace(errorMessage) ? "Error occurred while processing your request" : errorMessage;
             return response;
         }
 

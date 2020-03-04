@@ -15,7 +15,7 @@ namespace ReviewsService_Core.Domain.Model
         /// </summary>
         /// 
         [JsonProperty("recordStatus")]
-        public RecordStatus RecordStatus { get; set; }
+        public RecordStatus RecordStatus { get; set; } = RecordStatus.Active;
         /// <summary>
         /// Date record was created
         /// </summary> 
