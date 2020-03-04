@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ceti.Core.Logic
+﻿namespace ReviewsService_Core.Logic
 {
     public class BaseLogic
     {

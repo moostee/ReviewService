@@ -1,5 +1,4 @@
-﻿using Ceti.Core.Logic;
-using ReviewsService_Core.Data;
+﻿using ReviewsService_Core.Data;
 using ReviewsService_Core.Domain;
 using ReviewsService_Core.Domain.Entity;
 using ReviewsService_Core.Domain.Form;
@@ -7,7 +6,6 @@ using ReviewsService_Core.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ReviewsService_Core.Logic

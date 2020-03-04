@@ -3,5 +3,7 @@
     public interface IDataModule
     {
         ClientRepository Clients { get; }
+
+        AppRepository Apps { get; }
     }
 }
