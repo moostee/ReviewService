@@ -9,6 +9,8 @@ namespace ReviewsService_Core.Domain
 
         private AppFactory _app;
         public AppFactory Apps { get { if (_app == null) { _app = new AppFactory(); } return _app; } }
+        private ReviewTypeFactory _reviewtype;
+        public ReviewTypeFactory ReviewTypes { get { if (_reviewtype == null) { _reviewtype = new ReviewTypeFactory(); } return _reviewtype; } }
 
     }
 }

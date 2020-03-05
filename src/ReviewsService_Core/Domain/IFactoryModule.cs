@@ -9,5 +9,7 @@ namespace ReviewsService_Core.Domain
     {
         ClientFactory Clients { get; }
         AppFactory Apps { get; }
+
+        ReviewTypeFactory ReviewTypes { get; }
     }
 }

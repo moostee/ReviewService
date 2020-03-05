@@ -58,6 +58,20 @@ namespace ReviewsService_Core.Data
                     x.Column(y => y.UpdatedAtText).Ignore();
                 });
 
+            For<ReviewType>()
+                .PrimaryKey(x => x.Id)
+                .TableName("ReviewTypes");
+
+            For<ReviewTypeModel>()
+                .PrimaryKey(x => x.Id)
+                .TableName("reviewtypemodel")
+                .Columns(x =>
+                {
+                    x.Column(y => y.RecordStatusText).Ignore();
+                    x.Column(y => y.CreatedAtText).Ignore();
+                    x.Column(y => y.UpdatedAtText).Ignore();
+                });
+
         }
     }
 }

@@ -20,5 +20,8 @@ namespace ReviewsService_Core.Data
         private AppRepository _apps;
         public AppRepository Apps { get { if (_apps == null) { _apps = new AppRepository(_context); } return _apps; } }
 
+        private ReviewTypeRepository _reviewtypes;
+        public ReviewTypeRepository ReviewTypes { get { if (_reviewtypes == null) { _reviewtypes = new ReviewTypeRepository(_context); } return _reviewtypes; } }
+
     }
 }

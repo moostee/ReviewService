@@ -21,6 +21,7 @@ namespace ReviewsService_Core.Data
         public DbSet<Client> Clients { get; set; }
 
         public DbSet<App> Apps { get; set; }
+        public DbSet<ReviewType> ReviewTypes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

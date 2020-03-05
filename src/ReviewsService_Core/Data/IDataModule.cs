@@ -5,5 +5,8 @@
         ClientRepository Clients { get; }
 
         AppRepository Apps { get; }
+
+        ReviewTypeRepository ReviewTypes { get; }
+
     }
 }
