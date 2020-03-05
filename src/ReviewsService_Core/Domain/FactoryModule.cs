@@ -17,5 +17,7 @@ namespace ReviewsService_Core.Domain
         private AppClientFactory _appClient;
         public AppClientFactory AppClients { get { if (_appClient == null) { _appClient = new AppClientFactory(); } return _appClient; } }
 
+        private ReviewVoteTypeFactory _reviewvotetype;
+        public ReviewVoteTypeFactory ReviewVoteTypes { get { if (_reviewvotetype == null) { _reviewvotetype = new ReviewVoteTypeFactory(); } return _reviewvotetype; } }
     }
 }
