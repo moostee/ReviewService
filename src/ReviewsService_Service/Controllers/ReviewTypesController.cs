@@ -48,5 +48,41 @@ namespace ReviewsService_Service.Controllers
                 return BadRequest(Utilities.CatchException(response, ex.Message));
             }
         }
+
+        /// <summary>
+        /// Update ReviewType
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="form"></param>
+        /// <returns></returns>
+        [Route("Update")]
+        [HttpPost]
+        [Produces(typeof(ReviewTypeModel))]
+        public IActionResult Update(long id, ReviewTypeForm form)
+        {
+            var response = Utilities.InitializeResponse();
+            try
+            {
+                var model = Logic.ReviewTypeLogic.Create(form);
+                if (id != model.Id)
+                    return BadRequest(Utilities.UnsuccessfulResponse(response, "Route Parameter does not match model ID"));
+                var found = Logic.ReviewTypeLogic.Get(id);
+                if (found == null)
+                    return NotFound(Utilities.UnsuccessfulResponse(response, "ReviewType not found"));
+                var check = Logic.ReviewTypeLogic.UpdateExists(model);
+                if (check)
+                    return BadRequest(Utilities.UnsuccessfulResponse(response,  "ReviewType configuration already exists"));
+                response.Data = Logic.ReviewTypeLogic.Update(found, model,
+                    "Name,RecordStatus");
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return BadRequest(Utilities.CatchException(response, ex.Message));
+            }
+        }
+
+
     }
 }
