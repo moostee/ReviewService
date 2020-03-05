@@ -96,5 +96,33 @@ namespace ReviewsService_Service.Controllers
                 return BadRequest(Utilities.CatchException(response, ex.Message));
             }
         }
+
+        [Route("Update")]
+        [HttpPost]
+        public IActionResult Update(int id, ReviewVoteTypeForm form)
+        {
+            var response = Utilities.InitializeResponse();
+            try
+            {
+                form.Id = id;
+                var model = Logic.ReviewVoteTypes.Create(form);
+                if (id != model.Id)
+                    return BadRequest(Utilities.UnsuccessfulResponse(response, "Route Parameter does mot match model ID"));
+                var found = Logic.ReviewVoteTypes.Get(id);
+                if (found == null)
+                    return NotFound(Utilities.UnsuccessfulResponse(response, "ReviewVoteType does not exist"));
+                var check = Logic.ReviewVoteTypes.UpdateExists(model);
+                if (Logic.ReviewVoteTypes.UpdateExists(model))
+                    return BadRequest(Utilities.UnsuccessfulResponse(response, "ReviewVoteType configuration already exists"));
+                response.Data = Logic.ReviewVoteTypes.Update(found, model,
+                    "name");
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return BadRequest(Utilities.CatchException(response, ex.Message));
+            }
+        }
     }
 }
