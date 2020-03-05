@@ -155,5 +155,32 @@ namespace ReviewsService_Service.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete ReviewType
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("Delete")]
+        [HttpPost]
+        [Produces(typeof(ReviewTypeModel))]
+        public IActionResult Delete(long id)
+        {
+            var response = Utilities.InitializeResponse();
+            try
+            {
+                var found = Logic.ReviewTypeLogic.Get(id);
+                if (found == null)
+                    return NotFound(Utilities.UnsuccessfulResponse(response, "ReviewType not found"));
+                Logic.ReviewTypeLogic.Delete(found);
+                response.Data = found;
+                return Ok(response);
+            }
+            catch(Exception ex)
+            {
+                Log.Error(ex);
+                return BadRequest(Utilities.CatchException(response, ex.Message));
+            }
+        }
+
     }
 }
