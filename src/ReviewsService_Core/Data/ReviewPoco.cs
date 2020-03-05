@@ -105,7 +105,7 @@ namespace ReviewsService_Core.Data
                 .PrimaryKey(x => x.Id)
                 .TableName("ReviewVoteTypes");
 
-            For<AppClientModel>()
+            For<ReviewVoteTypeModel>()
                 .PrimaryKey(x => x.Id)
                 .TableName("reviewvotetypemodel")
                 .Columns(x =>
