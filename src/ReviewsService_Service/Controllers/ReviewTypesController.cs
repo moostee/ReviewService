@@ -84,5 +84,32 @@ namespace ReviewsService_Service.Controllers
         }
 
 
+        /// <summary>
+        /// Get ReviewType by ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("Detail")]
+        [Produces(typeof(ReviewTypeModel))]
+        public async Task<IActionResult> Get(long id)
+        {
+            var response = Utilities.InitializeResponse();
+            try
+            {
+                var item = await Logic.ReviewTypeLogic.GetModel(id);
+                if (item == null)
+                {
+                    return NotFound(Utilities.UnsuccessfulResponse(response, "ReviewType not found"));
+                }
+                return Ok(item);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return BadRequest(Utilities.CatchException(response, ex.Message));
+            }
+        }
+
     }
 }
