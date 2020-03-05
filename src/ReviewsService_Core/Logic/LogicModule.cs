@@ -32,5 +32,8 @@ namespace ReviewsService_Core.Logic
 
         public AppClientLogic AppClients { get { if (_appClient == null) { _appClient = new AppClientLogic(_data, _factory); } return _appClient; } }
 
+        private ReviewVoteTypeLogic _reviewvotetype;
+
+        public ReviewVoteTypeLogic ReviewVoteTypes { get { if (_reviewvotetype == null) { _reviewvotetype = new ReviewVoteTypeLogic(_data, _factory); } return _reviewvotetype; } }
     }
 }

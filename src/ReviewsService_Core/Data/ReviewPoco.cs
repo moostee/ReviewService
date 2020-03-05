@@ -101,6 +101,19 @@ namespace ReviewsService_Core.Data
                     x.Column(y => y.UpdatedAtText).Ignore();
                 });
 
+            For<ReviewVoteType>()
+                .PrimaryKey(x => x.Id)
+                .TableName("ReviewVoteTypes");
+
+            For<AppClientModel>()
+                .PrimaryKey(x => x.Id)
+                .TableName("reviewvotetypemodel")
+                .Columns(x =>
+                {
+                    x.Column(y => y.RecordStatusText).Ignore();
+                    x.Column(y => y.CreatedAtText).Ignore();
+                    x.Column(y => y.UpdatedAtText).Ignore();
+                });
         }
     }
 }

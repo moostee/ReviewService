@@ -26,6 +26,8 @@ namespace ReviewsService_Core.Data
 
         public DbSet<AppClient> AppClients { get; set; }
 
+        public DbSet<ReviewVoteType> ReviewVoteTypes { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (_options == null)

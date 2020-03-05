@@ -30,5 +30,8 @@ namespace ReviewsService_Core.Data
         private AppClientRepository _appClients;
         public AppClientRepository AppClients { get { if (_appClients == null) { _appClients = new AppClientRepository(_context); } return _appClients; } }
 
+        private ReviewVoteTypeRepository _reviewvotetypes;
+        public ReviewVoteTypeRepository ReviewVoteTypes { get { if (_reviewvotetypes == null) { _reviewvotetypes = new ReviewVoteTypeRepository(_context); } return _reviewvotetypes; } }
+
     }
 }
