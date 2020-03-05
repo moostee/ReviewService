@@ -98,5 +98,33 @@ namespace ReviewsService_Service.Controllers
                 return BadRequest(Utilities.CatchException(response, ex.Message));
             }
         }
+
+        [Route("Update")]
+        [HttpPost]
+        public IActionResult Update(long id, AppClientForm form)
+        {
+            var response = Utilities.InitializeResponse();
+            try
+            {
+                form.Id = id;
+                var model = Logic.AppClients.Create(form);
+                if (id != model.Id)
+                    return BadRequest(Utilities.UnsuccessfulResponse(response, "Route Parameter does mot match model ID"));
+                var found = Logic.AppClients.Get(id);
+                if (found == null)
+                    return NotFound(Utilities.UnsuccessfulResponse(response, "AppClient does not exist"));
+                var check = Logic.AppClients.UpdateExists(model);
+                if (Logic.AppClients.UpdateExists(model))
+                    return BadRequest(Utilities.UnsuccessfulResponse(response, "AppClient configuration already exists"));
+                response.Data = Logic.AppClients.Update(found, model,
+                    "AppId,ClientId,ClientSecret,RecordStatus");
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return BadRequest(Utilities.CatchException(response, ex.Message));
+            }
+        }
     }
 }
