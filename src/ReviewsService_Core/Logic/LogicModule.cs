@@ -28,6 +28,9 @@ namespace ReviewsService_Core.Logic
 
         private ReviewLogic _review;
         public ReviewLogic ReviewLogic { get { if (_review == null) { _review = new ReviewLogic(_data,_factory); } return _review; } }
+        private AppClientLogic _appClient;
+
+        public AppClientLogic AppClients { get { if (_appClient == null) { _appClient = new AppClientLogic(_data, _factory); } return _appClient; } }
 
     }
 }

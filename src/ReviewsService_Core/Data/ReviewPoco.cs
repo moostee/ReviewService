@@ -86,6 +86,21 @@ namespace ReviewsService_Core.Data
                     x.Column(y => y.UpdatedAtText).Ignore();
                 });
 
+
+            For<AppClient>()
+                .PrimaryKey(x => x.Id)
+                .TableName("AppClients");
+
+            For<AppClientModel>()
+                .PrimaryKey(x => x.Id)
+                .TableName("appclientmodel")
+                .Columns(x =>
+                {
+                    x.Column(y => y.RecordStatusText).Ignore();
+                    x.Column(y => y.CreatedAtText).Ignore();
+                    x.Column(y => y.UpdatedAtText).Ignore();
+                });
+
         }
     }
 }

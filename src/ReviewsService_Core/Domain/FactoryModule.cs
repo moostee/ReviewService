@@ -14,6 +14,8 @@ namespace ReviewsService_Core.Domain
 
         private ReviewFactory _review;
         public ReviewFactory Reviews { get { if (_review == null) { _review = new ReviewFactory(); } return _review; } }
+        private AppClientFactory _appClient;
+        public AppClientFactory AppClients { get { if (_appClient == null) { _appClient = new AppClientFactory(); } return _appClient; } }
 
     }
 }
