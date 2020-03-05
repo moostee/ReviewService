@@ -1,4 +1,5 @@
-﻿using ReviewsService_Core.Domain;
+﻿using ReviewsService_Core.Data.ReviewService;
+using ReviewsService_Core.Domain;
 
 namespace ReviewsService_Core.Data
 {
@@ -22,6 +23,10 @@ namespace ReviewsService_Core.Data
 
         private ReviewTypeRepository _reviewtypes;
         public ReviewTypeRepository ReviewTypes { get { if (_reviewtypes == null) { _reviewtypes = new ReviewTypeRepository(_context); } return _reviewtypes; } }
+
+        private ReviewRepository _reviews;
+        public ReviewRepository Reviews { get { if (_reviews == null) { _reviews = new ReviewRepository(_context); } return _reviews; } }
+
 
     }
 }

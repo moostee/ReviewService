@@ -26,6 +26,8 @@ namespace ReviewsService_Core.Logic
         private ReviewTypeLogic _reviewtype;
         public ReviewTypeLogic ReviewTypeLogic { get { if (_reviewtype == null) { _reviewtype = new ReviewTypeLogic(_data,_factory); } return _reviewtype; } }
 
+        private ReviewLogic _review;
+        public ReviewLogic ReviewLogic { get { if (_review == null) { _review = new ReviewLogic(_data,_factory); } return _review; } }
 
     }
 }
