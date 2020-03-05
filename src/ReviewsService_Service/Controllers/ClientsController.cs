@@ -103,7 +103,7 @@ namespace ReviewsService_Service.Controllers
         }
 
         [Route("Delete")]
-        [HttpDelete]
+        [HttpPost]
         public IActionResult Delete(int id)
         {
             var response = Utilities.InitializeResponse();

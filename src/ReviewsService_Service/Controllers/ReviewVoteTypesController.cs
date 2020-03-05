@@ -124,5 +124,26 @@ namespace ReviewsService_Service.Controllers
                 return BadRequest(Utilities.CatchException(response, ex.Message));
             }
         }
+
+        [Route("Delete")]
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var response = Utilities.InitializeResponse();
+            try
+            {
+                var found = Logic.ReviewVoteTypes.Get(id);
+                if (found == null)
+                    return NotFound(Utilities.UnsuccessfulResponse(response, "ReviewVoteType does not exist"));
+                Logic.ReviewVoteTypes.Delete(found);
+                response.Data = found;
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return BadRequest(Utilities.CatchException(response, ex.Message));
+            }
+        }
     }
 }
