@@ -74,5 +74,27 @@ namespace ReviewsService_Service.Controllers
                 return BadRequest(Utilities.CatchException(response, ex.Message));
             }
         }
+
+        [HttpGet]
+        [Route("Detail")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var response = Utilities.InitializeResponse();
+            try
+            {
+                var item = await Logic.ReviewVoteTypes.GetModel(id);
+                if (item == null)
+                {
+                    return NotFound(Utilities.UnsuccessfulResponse(response, "ReviewVoteType does not exist"));
+                }
+                response.Data = item;
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return BadRequest(Utilities.CatchException(response, ex.Message));
+            }
+        }
     }
 }
