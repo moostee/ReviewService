@@ -1,4 +1,6 @@
-﻿namespace ReviewsService_Core.Data
+﻿using ReviewsService_Core.Data.ReviewService;
+
+namespace ReviewsService_Core.Data
 {
     public interface IDataModule
     {
@@ -8,5 +10,6 @@
 
         ReviewTypeRepository ReviewTypes { get; }
 
+        ReviewRepository Reviews { get; }
     }
 }

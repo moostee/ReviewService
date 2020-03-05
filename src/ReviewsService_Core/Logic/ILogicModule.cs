@@ -9,5 +9,7 @@ namespace ReviewsService_Core.Logic
         AppLogic AppLogic { get; }
 
         ReviewTypeLogic ReviewTypeLogic { get; }
+
+        ReviewLogic ReviewLogic { get; }
     }
 }
