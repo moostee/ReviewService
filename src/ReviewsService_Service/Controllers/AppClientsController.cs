@@ -126,5 +126,26 @@ namespace ReviewsService_Service.Controllers
                 return BadRequest(Utilities.CatchException(response, ex.Message));
             }
         }
+
+        [Route("Delete")]
+        [HttpPost]
+        public IActionResult Delete(long id)
+        {
+            var response = Utilities.InitializeResponse();
+            try
+            {
+                var found = Logic.AppClients.Get(id);
+                if (found == null)
+                    return NotFound(Utilities.UnsuccessfulResponse(response, "AppClient does not exist"));
+                Logic.AppClients.Delete(found);
+                response.Data = found;
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return BadRequest(Utilities.CatchException(response, ex.Message));
+            }
+        }
     }
 }
