@@ -65,6 +65,7 @@ namespace ReviewsService_Service.Controllers
             var response = Utilities.InitializeResponse();
             try
             {
+                form.Id = id;
                 var model = Logic.ReviewTypeLogic.Create(form);
                 if (id != model.Id)
                     return BadRequest(Utilities.UnsuccessfulResponse(response, "Route Parameter does not match model ID"));

@@ -51,8 +51,7 @@ namespace ReviewsService_Service.Controllers
                 AddHeader("X-Pagination", linkBuilder.PaginationHeader);
                 var dto = new List<AppModel>();
                 if (items.TotalItems <= 0) return Ok(dto);
-                var dtos = items.Items.ShapeList(fields);
-                response.Data = dtos;
+                response.Data = items.Items.ShapeList(fields);
                 return Ok(response);
             }
             catch (Exception ex)
