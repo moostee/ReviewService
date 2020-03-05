@@ -76,5 +76,27 @@ namespace ReviewsService_Service.Controllers
                 return BadRequest(Utilities.CatchException(response, ex.Message));
             }
         }
+
+        [HttpGet]
+        [Route("Detail")]
+        public async Task<IActionResult> Get(long id)
+        {
+            var response = Utilities.InitializeResponse();
+            try
+            {
+                var item = await Logic.AppClients.GetModel(id);
+                if (item == null)
+                {
+                    return NotFound(Utilities.UnsuccessfulResponse(response, "AppClient does not exist"));
+                }
+                response.Data = item;
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return BadRequest(Utilities.CatchException(response, ex.Message));
+            }
+        }
     }
 }
