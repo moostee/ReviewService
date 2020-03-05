@@ -27,6 +27,8 @@ namespace ReviewsService_Core.Data
         private ReviewRepository _reviews;
         public ReviewRepository Reviews { get { if (_reviews == null) { _reviews = new ReviewRepository(_context); } return _reviews; } }
 
+        private AppClientRepository _appClients;
+        public AppClientRepository AppClients { get { if (_appClients == null) { _appClients = new AppClientRepository(_context); } return _appClients; } }
 
     }
 }

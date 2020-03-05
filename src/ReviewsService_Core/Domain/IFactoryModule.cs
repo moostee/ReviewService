@@ -13,5 +13,6 @@ namespace ReviewsService_Core.Domain
         ReviewTypeFactory ReviewTypes { get; }
         ReviewFactory Reviews { get; }
 
+        AppClientFactory AppClients { get; }
     }
 }

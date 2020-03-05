@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ReviewsService_Core.Data
+namespace ReviewsService_Core.Data.ReviewService
 {
     public class ClientRepository : BaseRepository<Client, ClientModel, int>
     {
