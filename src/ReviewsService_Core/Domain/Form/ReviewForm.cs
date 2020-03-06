@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace ReviewsService_Core.Domain.Form
@@ -24,10 +25,12 @@ namespace ReviewsService_Core.Domain.Form
         /// <summary>
         /// 
         /// </summary>
+        [Required]
         public string AppFeature { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [Required]
         public string UserId { get; set; }
         /// <summary>
         /// 
