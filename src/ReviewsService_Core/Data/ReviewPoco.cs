@@ -114,6 +114,20 @@ namespace ReviewsService_Core.Data
                     x.Column(y => y.CreatedAtText).Ignore();
                     x.Column(y => y.UpdatedAtText).Ignore();
                 });
+
+            For<ReviewVote>()
+                .PrimaryKey(x => x.Id)
+                .TableName("ReviewVotes");
+
+            For<ReviewVoteModel>()
+                .PrimaryKey(x => x.Id)
+                .TableName("reviewvotemodel")
+                .Columns(x =>
+                {
+                    x.Column(y => y.RecordStatusText).Ignore();
+                    x.Column(y => y.CreatedAtText).Ignore();
+                    x.Column(y => y.UpdatedAtText).Ignore();
+                });
         }
     }
 }

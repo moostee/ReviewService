@@ -14,5 +14,7 @@ namespace ReviewsService_Core.Data
         AppClientRepository AppClients { get; }
 
         ReviewVoteTypeRepository ReviewVoteTypes { get; }
+
+        ReviewVoteRepository ReviewVotes { get; }
     }
 }

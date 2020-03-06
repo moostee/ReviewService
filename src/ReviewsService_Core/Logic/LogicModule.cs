@@ -35,5 +35,8 @@ namespace ReviewsService_Core.Logic
         private ReviewVoteTypeLogic _reviewvotetype;
 
         public ReviewVoteTypeLogic ReviewVoteTypes { get { if (_reviewvotetype == null) { _reviewvotetype = new ReviewVoteTypeLogic(_data, _factory); } return _reviewvotetype; } }
+
+        private ReviewVoteLogic _reviewvote;
+        public ReviewVoteLogic ReviewVotes { get { if (_reviewvote == null) { _reviewvote = new ReviewVoteLogic(_data, _factory); } return _reviewvote; } }
     }
 }
