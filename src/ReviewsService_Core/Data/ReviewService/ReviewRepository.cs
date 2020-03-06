@@ -147,7 +147,7 @@ namespace ReviewsService_Core.Data.ReviewService
         public Page<ReviewModel> SearchView(long appClientId = 0, string comment = "", int rating = 0, string appFeature = "", string userId = "", bool? isActive = null, long reviewTypeId = 0, int parentId = 0,
             long page = 1, long pageSize = 10, string sort = "Id")
         {
-            var sql = " where Id > 0 ";
+            var sql = " where Id > \'00000000-0000-0000-0000-000000000000\' ";
             var c = 0;
 
             if (appClientId > 0)

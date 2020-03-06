@@ -144,8 +144,8 @@ namespace ReviewsService_Service.Controllers
                 jo.Add("sort", sort);
                 var linkBuilder = new PageLinkBuilder(jo, page, pageSize, items.TotalItems, draw);
                 AddHeader("X-Pagination", linkBuilder.PaginationHeader);
-                var dto = new List<ReviewTypeModel>();
-                if (items.TotalItems <= 0) return Ok(dto);
+                var dto = new List<ReviewTypeModel>();                
+                if (items.TotalItems <= 0) return Ok(response);
                 response.Data = items.Items.ShapeList(fields);
                 return Ok(response);
             }
