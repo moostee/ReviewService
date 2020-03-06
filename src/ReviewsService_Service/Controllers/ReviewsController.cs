@@ -4,14 +4,16 @@ using ReviewsService_Core.Domain.Form;
 using ReviewsService_Core.Domain.Model;
 using ReviewsService_Core.Domain.Model.Helper;
 using ReviewsService_Core.Logic;
+using ReviewsService_Core.UI;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ReviewsService_Service.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReviewsController : ControllerBase
+    public class ReviewsController : BaseApiController
     {
         private readonly ILogicModule Logic;
 
@@ -103,6 +105,61 @@ namespace ReviewsService_Service.Controllers
                     return NotFound(Utilities.UnsuccessfulResponse(response, "Review not found"));
                 Logic.ReviewLogic.Delete(found);
                 response.Data = found;
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return BadRequest(Utilities.CatchException(response, ex.Message));
+            }
+        }
+
+
+        /// <summary>
+        /// Search, Page, filter and Shaped Reviews
+        /// </summary>
+        /// <param name="sort"></param>
+        /// <param name="appClientId"></param>
+        /// <param name="comment"></param>
+        /// <param name="rating"></param>
+        /// <param name="appFeature"></param>
+        /// <param name="userId"></param>
+        /// <param name="isActive"></param>
+        /// <param name="reviewTypeId"></param>
+        /// <param name="parentId"></param>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="fields"></param>
+        /// <param name="draw"></param>
+        /// <returns></returns>
+        [Produces(typeof(IEnumerable<ReviewModel>))]
+        [Route("Search", Name = "ReviewApi")]
+        [HttpGet]
+        public IActionResult Get(string sort = "Id", long appClientId = 0, string comment = "", int rating = 0, string appFeature = "", string userId = "", bool? isActive = null, long reviewTypeId = 0, int parentId = 0, long page = 1, long pageSize = 10, string fields = "", int draw = 1)
+        {
+            var response = Utilities.InitializeResponse();
+            try
+            {
+                var items = Logic.ReviewLogic.SearchView(appClientId, comment, rating, appFeature, userId, isActive, reviewTypeId, parentId, page, pageSize, sort);
+
+                if (page > items.TotalPages) page = items.TotalPages;
+                var jo = new JObjectHelper();
+                jo.Add("appClientId", appClientId);
+                jo.Add("comment", comment);
+                jo.Add("rating", rating);
+                jo.Add("appFeature", appFeature);
+                jo.Add("userId", userId);
+                jo.Add("isActive", isActive);
+                jo.Add("reviewTypeId", reviewTypeId);
+                jo.Add("parentId", parentId);
+
+                jo.Add("fields", fields);
+                jo.Add("sort", sort);
+                var linkBuilder = new PageLinkBuilder(jo, page, pageSize, items.TotalItems, draw);
+                AddHeader("X-Pagination", linkBuilder.PaginationHeader);
+                var dto = new List<ReviewModel>();
+                if (items.TotalItems <= 0) return Ok(dto);
+                response.Data = items.Items.ShapeList(fields);
                 return Ok(response);
             }
             catch (Exception ex)
