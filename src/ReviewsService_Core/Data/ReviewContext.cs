@@ -28,6 +28,8 @@ namespace ReviewsService_Core.Data
 
         public DbSet<ReviewVoteType> ReviewVoteTypes { get; set; }
 
+        public DbSet<ReviewVote> ReviewVotes { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (_options == null)

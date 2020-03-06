@@ -1,0 +1,55 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using ReviewsService_Core.Common;
+using ReviewsService_Core.Domain.Form;
+using ReviewsService_Core.Domain.Model;
+using ReviewsService_Core.Domain.Model.Helper;
+using ReviewsService_Core.Logic;
+using ReviewsService_Core.UI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+
+namespace ReviewsService_Service.Controllers
+{
+    /// <summary>
+    /// ReviewVotes CRUD
+    /// </summary>
+    public class ReviewVotesController : BaseApiController
+    {
+        private readonly ILogicModule Logic;
+
+        public ReviewVotesController(ILogicModule logic)
+        {
+            Logic = logic;
+        }
+        /// <summary>
+        /// Add ReviewVote
+        /// </summary>
+        /// <param name="form"></param>
+        /// <returns></returns>
+        [Route("Create")]
+        [HttpPost]
+        [Produces(typeof(ReviewVoteModel))]
+        public async Task<IActionResult> Create(ReviewVoteForm form)
+        {
+            try
+            {
+                var model = Logic.ReviewVotes.Create(form);
+                var check = Logic.ReviewVotes.CreateExists(model);
+                if (check)
+                {
+                    return NoContent();
+                }
+                var dto = await Logic.ReviewVotes.Insert(model);
+                return Ok(dto);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return BadRequest(ex.Message);
+            }
+        }
+    }
+}

@@ -14,5 +14,6 @@ namespace ReviewsService_Core.Logic
        AppClientLogic AppClients { get; }
 
         ReviewVoteTypeLogic ReviewVoteTypes { get; }
+        ReviewVoteLogic ReviewVotes { get; }
     }
 }

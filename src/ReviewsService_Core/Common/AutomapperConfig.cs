@@ -49,6 +49,9 @@ namespace ReviewsService_Core.Common
                 cfg.CreateMap<ReviewVoteTypeModel, ReviewVoteTypeForm>().ReverseMap();
 
 
+                cfg.CreateMap<ReviewVote, ReviewVoteModel>().ReverseMap();
+                cfg.CreateMap<ReviewVote, ReviewVoteForm>().ReverseMap();
+                cfg.CreateMap<ReviewVoteModel, ReviewVoteForm>().ReverseMap();
             });
         }
     }

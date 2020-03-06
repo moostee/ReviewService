@@ -33,5 +33,9 @@ namespace ReviewsService_Core.Data
         private ReviewVoteTypeRepository _reviewvotetypes;
         public ReviewVoteTypeRepository ReviewVoteTypes { get { if (_reviewvotetypes == null) { _reviewvotetypes = new ReviewVoteTypeRepository(_context); } return _reviewvotetypes; } }
 
+        private ReviewVoteRepository _reviewvotes;
+        public ReviewVoteRepository ReviewVotes { get { if (_reviewvotes == null) { _reviewvotes = new ReviewVoteRepository(_context); } return _reviewvotes; } }
+
+
     }
 }

@@ -19,5 +19,9 @@ namespace ReviewsService_Core.Domain
 
         private ReviewVoteTypeFactory _reviewvotetype;
         public ReviewVoteTypeFactory ReviewVoteTypes { get { if (_reviewvotetype == null) { _reviewvotetype = new ReviewVoteTypeFactory(); } return _reviewvotetype; } }
+
+        
+        private ReviewVoteFactory _reviewvote;
+        public ReviewVoteFactory ReviewVotes { get { if (_reviewvote == null) { _reviewvote = new ReviewVoteFactory(); } return _reviewvote; } }
     }
 }
