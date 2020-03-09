@@ -172,10 +172,11 @@ namespace ReviewsService_Core.Logic.ReviewService
             var entity = Factory.ReviewVotes.CreateEntity(model);
             // Check if there is an active ReviewVote
             var isActiveReviewVote = Data.ReviewVotes.Search(entity.ReviewId.ToString(), entity.UserId, 0, true).FirstOrDefault();
-            // disable it if found
+            // make it inactive if found
             if(isActiveReviewVote != null)
             {
                 isActiveReviewVote.IsActive = false;
+                Data.ReviewVotes.Update(isActiveReviewVote);
             }
             // then make this new one active
             entity.IsActive = true;
