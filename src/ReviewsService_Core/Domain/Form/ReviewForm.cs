@@ -12,7 +12,7 @@ namespace ReviewsService_Core.Domain.Form
     {
         /// <summary>
         /// 
-        /// </summary>
+        /// </summary>        
         public long AppClientId { get; set; }
         /// <summary>
         /// 
@@ -32,10 +32,6 @@ namespace ReviewsService_Core.Domain.Form
         /// </summary>
         [Required]
         public string UserId { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool IsActive { get; set; }
         /// <summary>
         /// 
         /// </summary>
