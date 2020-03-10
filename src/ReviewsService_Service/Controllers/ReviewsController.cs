@@ -7,6 +7,7 @@ using ReviewsService_Core.Logic;
 using ReviewsService_Core.UI;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ReviewsService_Service.Controllers
@@ -35,13 +36,26 @@ namespace ReviewsService_Service.Controllers
             var response = Utilities.InitializeResponse();
             try
             {
+                var clientSecret = HttpContext.Request.Headers["X-ClientSecret"];
+                form.AppClientId = Logic.AppClients.Search(0, 0, clientSecret).FirstOrDefault().Id;
+
                 var model = Logic.ReviewLogic.Create(form);
-                var check = Logic.ReviewLogic.CreateExists(model);
-                if (check)
+                var getModelIfExists = Logic.ReviewLogic.Search(model.AppClientId, "", 0, model.AppFeature, model.UserId, true).FirstOrDefault();
+
+                if(getModelIfExists != null)
                 {
-                    return BadRequest(Utilities.UnsuccessfulResponse(response, "Review already exists"));
+                    getModelIfExists.IsActive = false;
+                    Logic.ReviewLogic.Update(getModelIfExists);
+
+                    model.IsActive = true;
+                    response.Data = await Logic.ReviewLogic.Insert(model);
                 }
-                response.Data = await Logic.ReviewLogic.Insert(model);
+                else
+                {
+                    model.IsActive = true;
+                    response.Data = await Logic.ReviewLogic.Insert(model);
+                }
+
                 return Ok(response);
             }
             catch (Exception ex)
@@ -61,11 +75,14 @@ namespace ReviewsService_Service.Controllers
         [Route("Update")]
         [HttpPost]
         [Produces(typeof(ReviewModel))]
-        public IActionResult Update(Guid id, ReviewForm form)
+        public async Task<IActionResult> Update(Guid id, ReviewForm form)
         {
             var response = Utilities.InitializeResponse();
             try
             {
+                var clientSecret = HttpContext.Request.Headers["X-ClientSecret"];
+                form.AppClientId = Logic.AppClients.Search(0, 0, clientSecret).FirstOrDefault().Id;
+
                 form.Id = id;
                 var model = Logic.ReviewLogic.Create(form);
                 if (id != model.Id)
@@ -73,11 +90,13 @@ namespace ReviewsService_Service.Controllers
                 var found = Logic.ReviewLogic.Get(id);
                 if (found == null)
                     return NotFound(Utilities.UnsuccessfulResponse(response, "Review not found"));
-                var check = Logic.ReviewLogic.UpdateExists(model);
-                if (check)
-                    return BadRequest(Utilities.UnsuccessfulResponse(response, "Review configuration already exists"));
-                response.Data = Logic.ReviewLogic.Update(found, model,
-                    "AppClientId,Comment,Rating,AppFeature,UserId,IsActive,ReviewTypeId,ParentId,RecordStatus");
+
+                found.IsActive = false;
+                Logic.ReviewLogic.Update(found);
+
+                model.IsActive = true;
+                response.Data = await Logic.ReviewLogic.Insert(model);
+
                 return Ok(response);
             }
             catch (Exception ex)
