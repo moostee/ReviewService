@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using NPoco;
+using System;
 
 namespace ReviewsService_Core.Domain.Entity
 {

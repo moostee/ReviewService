@@ -93,9 +93,10 @@ namespace ReviewsService_Service
                 option.SwaggerEndpoint(swaggerOptions.UIEndpoint, swaggerOptions.Description);
             });
 
+
             app.UseCors(MyAllowSpecificOrigins);
 
-            //app.UseClientSecretMiddleware();
+            app.UseClientSecretMiddleware();
 
             app.UseHttpsRedirection();
 
@@ -103,6 +104,7 @@ namespace ReviewsService_Service
 
             app.UseAuthorization();
 
+            
             app.UseMiddleware<StackifyMiddleware.RequestTracerMiddleware>();
 
             app.UseEndpoints(endpoints =>
