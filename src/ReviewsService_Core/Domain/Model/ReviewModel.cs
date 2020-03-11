@@ -43,5 +43,9 @@ namespace ReviewsService_Core.Domain.Model
         /// </summary>
         public int ParentId { get; set; }
 
+        public int ReviewUpVotes { get; set; }
+
+        public int ReviewDownVotes { get; set; }
+
     }
 }

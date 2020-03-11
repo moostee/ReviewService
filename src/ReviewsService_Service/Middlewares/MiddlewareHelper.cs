@@ -8,5 +8,6 @@ namespace ReviewsService_Service.Middlewares
         {
             return app.UseMiddleware<ClientSecretMiddleware>();
         }
+
     }
 }

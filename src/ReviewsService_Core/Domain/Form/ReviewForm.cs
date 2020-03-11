@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Text.Json.Serialization;
 
 namespace ReviewsService_Core.Domain.Form
 {
@@ -10,9 +9,11 @@ namespace ReviewsService_Core.Domain.Form
     /// </summary>
     public class ReviewForm : BaseForm<Guid>
     {
+
         /// <summary>
         /// 
-        /// </summary>        
+        /// </summary>   
+        [JsonIgnore]
         public long AppClientId { get; set; }
         /// <summary>
         /// 
@@ -21,6 +22,7 @@ namespace ReviewsService_Core.Domain.Form
         /// <summary>
         /// 
         /// </summary>
+        [Range(1, 5)]
         public int Rating { get; set; }
         /// <summary>
         /// 
