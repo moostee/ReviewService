@@ -34,16 +34,17 @@ namespace ReviewsService_Service.Controllers
         [Produces(typeof(ReviewVoteModel))]
         public async Task<IActionResult> Create(ReviewVoteForm form)
         {
+            var response = Utilities.InitializeResponse();
             try
             {
                 var model = Logic.ReviewVotes.Create(form);
                 var check = Logic.ReviewVotes.CreateExists(model);
                 if (check)
                 {
-                    return NoContent();
+                    return BadRequest(Utilities.UnsuccessfulResponse(response, "Review vote already exists"));
                 }
-                var dto = await Logic.ReviewVotes.Insert(model);
-                return Ok(dto);
+                response.Data = await Logic.ReviewVotes.Insert(model);
+                return Ok(response);
             }
             catch (Exception ex)
             {

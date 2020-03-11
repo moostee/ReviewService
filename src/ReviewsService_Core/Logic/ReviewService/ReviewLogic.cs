@@ -111,7 +111,7 @@ namespace ReviewsService_Core.Logic.ReviewService
         ///<param name="sort"></param>
         /// <returns></returns>
         public Page<ReviewModel> SearchView(long appClientId = 0, string comment = "", int rating = 0, string appFeature = "", string userId = "", bool? isActive = null, long reviewTypeId = 0, int parentId = 0,
-            long page = 1, long pageSize = 10, string sort = "")
+            long page = 1, long pageSize = 10, string sort = "Id")
         {
             return Data.Reviews.SearchView(appClientId, comment, rating, appFeature, userId, isActive, reviewTypeId, parentId, page, pageSize, sort);
         }
