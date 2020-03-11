@@ -95,6 +95,7 @@ namespace ReviewsService_Service.Controllers
                 Logic.ReviewLogic.Update(found);
 
                 model.IsActive = true;
+                model.Id = Guid.Empty;
                 response.Data = await Logic.ReviewLogic.Insert(model);
 
                 return Ok(response);

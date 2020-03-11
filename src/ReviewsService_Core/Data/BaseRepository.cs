@@ -92,7 +92,7 @@ namespace ReviewsService_Core.Data
             {
                 obj.UpdatedAt = DateTime.UtcNow;
                 obj.CreatedAt = DateTime.UtcNow;
-                _context.Set<TEntity>().Add(obj);
+                _context.Set<TEntity>().Add(obj);                
                 await _context.SaveChangesAsync();
                 return obj;
             }
@@ -346,7 +346,7 @@ namespace ReviewsService_Core.Data
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public virtual TEntity InsertNpoco(TEntity obj)
+        public async virtual Task<TEntity> InsertNpoco(TEntity obj)
         {
             using (IDatabase db = Connection)
             {
@@ -354,7 +354,7 @@ namespace ReviewsService_Core.Data
                 {
                     obj.UpdatedAt = DateUtility.CurrentDateTime();
                     obj.CreatedAt = DateUtility.CurrentDateTime();
-                    db.Insert<TEntity>(obj);
+                    await db.InsertAsync<TEntity>(obj);
                     return obj;
                 }
                 catch (Exception e)

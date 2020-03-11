@@ -24,7 +24,7 @@ namespace ReviewsService_Core.Domain.Model
         /// <summary>
         /// 
         /// </summary>
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
     }
 }
