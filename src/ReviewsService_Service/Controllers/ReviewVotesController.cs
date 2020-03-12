@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ReviewsService_Core.Common;
+using ReviewsService_Core.Domain.Entity;
 using ReviewsService_Core.Domain.Form;
 using ReviewsService_Core.Domain.Model;
 using ReviewsService_Core.Domain.Model.Helper;
@@ -50,6 +51,29 @@ namespace ReviewsService_Service.Controllers
             {
                 Log.Error(ex);
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("EditHistory")]
+        [HttpGet]
+        public IActionResult Get(Guid reviewId, string userId)
+        {
+            var response = Utilities.InitializeResponse();
+            try
+            {
+                var reviewVotes = Logic.ReviewVotes.Search(reviewId.ToString(), userId);
+                var dto = new List<ReviewVoteModel>();
+                foreach (var reviewVote in reviewVotes)
+                {
+                    dto.Add(Logic.ReviewVotes.Create(reviewVote));
+                };
+                response.Data = dto;
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return BadRequest(Utilities.CatchException(response));
             }
         }
     }
