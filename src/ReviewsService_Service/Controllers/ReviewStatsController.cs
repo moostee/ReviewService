@@ -23,11 +23,13 @@ namespace ReviewsService_Service.Controllers
 
         [Route("Search", Name = "ReviewStatsApi")]
         [HttpGet]
-        public IActionResult Get(long appClientId, string appFeature)
+        public IActionResult Get(string appFeature)
         {
             var response = Utilities.InitializeResponse();
             try
             {
+                var clientSecret = HttpContext.Request.Headers["X-ClientSecret"];
+                var appClientId = Logic.AppClients.Search(0, 0, clientSecret).FirstOrDefault().Id;
                 var items = Logic.ReviewLogic.Search(appClientId, "", 0, appFeature, "", true);
                 ReviewStatsModel reviewStatsModel = new ReviewStatsModel();
                 foreach (var item in items)
