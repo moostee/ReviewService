@@ -155,11 +155,15 @@ namespace ReviewsService_Service.Controllers
         [Produces(typeof(IEnumerable<ReviewModel>))]
         [Route("Search", Name = "ReviewApi")]
         [HttpGet]
-        public IActionResult Get(string sort = "Id", long appClientId = 0, string comment = "", int rating = 0, string appFeature = "", string userId = "", bool? isActive = null, long reviewTypeId = 0, int parentId = 0, long page = 1, long pageSize = 10, string fields = "", int draw = 1)
+        public IActionResult Get(string sort = "Id", string comment = "", int rating = 0, string appFeature = "", string userId = "", bool? isActive = null, long reviewTypeId = 0, int parentId = 0, long page = 1, long pageSize = 10, string fields = "", int draw = 1)
         {
             var response = Utilities.InitializeResponse();
             try
             {
+
+                var clientSecret = HttpContext.Request.Headers["X-ClientSecret"];
+                var appClientId = Logic.AppClients.Search(0, 0, clientSecret).FirstOrDefault().Id;
+
                 var items = Logic.ReviewLogic.SearchView(appClientId, comment, rating, appFeature, userId, isActive, reviewTypeId, parentId, page, pageSize, sort);
 
                 if (page > items.TotalPages) page = items.TotalPages;

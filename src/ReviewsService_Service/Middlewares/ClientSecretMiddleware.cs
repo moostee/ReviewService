@@ -20,7 +20,7 @@ namespace ReviewsService_Service.Middlewares
         public async Task Invoke(HttpContext context, IDataModule dataModule)
         {
 
-            if (context.Request.Path.ToUriComponent().Contains("Reviews"))
+            if (context.Request.Path.ToUriComponent().Contains("Reviews") || context.Request.Path.ToUriComponent().Contains("ReviewStats"))
             {
                 var _data = dataModule.AppClients;
                 var response = Utilities.InitializeResponse();
